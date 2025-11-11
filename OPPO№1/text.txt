@@ -1,0 +1,11 @@
+Some random text here...
+Object #1: City apartment. The owner is "Ivanov Ivan" and it was registered on 2023.05.15.
+The price is around 250000 rubles. This is a nice place.
+
+More random text between objects...
+
+OBJECT 2: Country house. Owned by "Petrova Maria", registration: 2022.12.01.
+Cost: 1800000. Additional info...
+
+Object#3: Office space. Property owner: "Sidorov Alexey". 
+Date of registration: 2024.01.20. Price: 3200000.
