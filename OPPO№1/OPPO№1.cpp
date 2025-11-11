@@ -1,10 +1,9 @@
-﻿#include <iostream>
+﻿ #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <regex>
 #include <algorithm>
-#include <functional>
 
 using std::string;
 using std::vector;
@@ -21,40 +20,6 @@ private:
     int price_int = 0;
 
 public:
-    RealEstate() = default;  // использую конструкторы
-
-    RealEstate(const string& prop, const string& own, const string& dt, const string& pr)
-        : property(prop), owner(own), date(dt) {
-        setPrice(pr);
-    }
-
-    RealEstate(const string& prop, const string& own, const string& dt, int pr_int)
-        : property(prop), owner(own), date(dt), price_int(pr_int) {
-        price = std::to_string(pr_int);
-    }
-
-    // перегрузка операторов сравнения
-    bool operator>(const RealEstate& other) const {
-        return this->price_int > other.price_int;
-    }
-
-    bool operator<(const RealEstate& other) const {
-        return this->price_int < other.price_int;
-    }
-
-    bool operator==(const RealEstate& other) const {
-        return this->price_int == other.price_int;
-    }
-
-    // перегрузка оператора вывода
-    friend std::ostream& operator<<(std::ostream& os, const RealEstate& estate) {
-        os << "Недвижимость: " << estate.property
-            << "\nВладелец: " << estate.owner
-            << "\nДата: " << estate.date
-            << "\nСтоимость: " << estate.price << " руб.\n";
-        return os;
-    }
-
     void setProperty(const string& prop) { property = prop; }
     void setOwner(const string& own) { owner = own; }
     void setDate(const string& dt) { date = dt; }
@@ -70,7 +35,11 @@ public:
     int getPriceInt() const { return price_int; }
 
     void print() const {
-        cout << *this;  // Используем перегруженный оператор <<
+        cout << "Недвижимость: " << property
+            << "\nВладелец: " << owner
+            << "\nДата: " << date
+            << "\nСтоимость: " << price << " руб.\n"
+            << "\n";
     }
 
     bool isComplete() const {
@@ -95,6 +64,21 @@ vector<RealEstate> filterByPriceRange(const vector<RealEstate>& properties, int 
         }
     }
     return filtered;
+}
+
+// Функции сортировки по дате
+void sortByDateAscending(vector<RealEstate>& properties) {
+    std::sort(properties.begin(), properties.end(), 
+        [](const RealEstate& a, const RealEstate& b) {
+            return a.getDate() < b.getDate();
+        });
+}
+
+void sortByDateDescending(vector<RealEstate>& properties) {
+    std::sort(properties.begin(), properties.end(),
+        [](const RealEstate& a, const RealEstate& b) {
+            return a.getDate() > b.getDate();
+        });
 }
 
 int main() {
@@ -145,54 +129,104 @@ int main() {
 
     file.close();
 
-    // НОВАЯ СОРТИРОВКА с использованием перегруженного оператора >
-    std::sort(properties.begin(), properties.end(), std::greater<RealEstate>());
+    // Сортируем по цене по убыванию (исходная сортировка)
+    std::sort(properties.begin(), properties.end(), [](const RealEstate& a, const RealEstate& b) {
+        return a.getPriceInt() > b.getPriceInt();
+        });
+
 
     cout << "ВСЕ ОБЪЕКТЫ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
     for (size_t i = 0; i < properties.size(); i++) {
-        cout << "ОБЪЕКТ #" << (i + 1) << " (цена: " << properties[i].getPrice() << " руб.): "
+        cout << "ОБЪЕКТ #" << (i + 1) << " (цена: " << properties[i].getPrice() << " руб., дата: " << properties[i].getDate() << "): "
             << properties[i].getProperty() << endl;
     }
     cout << endl;
 
     int min_price, max_price;
-    char filter_choice;
+    char menu_choice;
 
-    cout << "Хотите отфильтровать объекты по цене? (y/n): ";
-    cin >> filter_choice;
+    cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
+    cout << "1 - Фильтр по цене" << endl;
+    cout << "2 - Сортировка по дате" << endl;
+    cout << "3 - Показать все объекты" << endl;
+    cout << "Выберите действие (1-3): ";
+    cin >> menu_choice;
 
-    if (filter_choice == 'y' || filter_choice == 'Y') {
-        cout << "Введите минимальную цену: ";
-        cin >> min_price;
-        cout << "Введите максимальную цену: ";
-        cin >> max_price;
+    switch (menu_choice) {
+        case '1': {
+            // Фильтр по цене
+            cout << "Введите минимальную цену: ";
+            cin >> min_price;
+            cout << "Введите максимальную цену: ";
+            cin >> max_price;
 
-        if (min_price > max_price) {
-            cout << "Ошибка: минимальная цена не может быть больше максимальной!" << endl;
-            cout << "Меняю местами..." << endl;
-            std::swap(min_price, max_price);
-        }
-
-        vector<RealEstate> filtered_properties = filterByPriceRange(properties, min_price, max_price);
-
-        if (filtered_properties.empty()) {
-            cout << "\nОбъектов в диапазоне от " << min_price << " до " << max_price << " руб. не найдено." << endl;
-        }
-        else {
-            cout << "\nОБЪЕКТЫ В ДИАПАЗОНЕ ОТ " << min_price << " ДО " << max_price << " РУБ: \n" << endl;
-            for (size_t i = 0; i < filtered_properties.size(); i++) {
-                cout << "Объект #" << (i + 1) << ":\n";
-                // Используем перегруженный оператор << вместо print()
-                cout << filtered_properties[i] << endl;
+            if (min_price > max_price) {
+                cout << "Ошибка: минимальная цена не может быть больше максимальной!" << endl;
+                cout << "Меняю местами..." << endl;
+                std::swap(min_price, max_price);
             }
+
+            vector<RealEstate> filtered_properties = filterByPriceRange(properties, min_price, max_price);
+
+            if (filtered_properties.empty()) {
+                cout << "\nОбъектов в диапазоне от " << min_price << " до " << max_price << " руб. не найдено." << endl;
+            }
+            else {
+                cout << "\nОБЪЕКТЫ В ДИАПАЗОНЕ ОТ " << min_price << " ДО " << max_price << " РУБ: \n" << endl;
+                for (size_t i = 0; i < filtered_properties.size(); i++) {
+                    cout << "Объект #" << (i + 1) << ":\n";
+                    filtered_properties[i].print();
+                }
+            }
+            break;
         }
-    }
-    else {
-        cout << "\n";
-        for (size_t i = 0; i < properties.size(); i++) {
-            cout << "ОБЪЕКТ #" << (i + 1) << "\n";
-            // Используем перегруженный оператор << вместо print()
-            cout << properties[i] << endl;
+        
+        case '2': {
+            // Сортировка по дате
+            char sort_order;
+            cout << "\n=== СОРТИРОВКА ПО ДАТЕ ===" << endl;
+            cout << "1 - По возрастанию (от старых к новым)" << endl;
+            cout << "2 - По убыванию (от новых к старым)" << endl;
+            cout << "Выберите порядок сортировки (1-2): ";
+            cin >> sort_order;
+            
+            if (sort_order == '1') {
+                sortByDateAscending(properties);
+                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
+            } else if (sort_order == '2') {
+                sortByDateDescending(properties);
+                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
+            } else {
+                cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
+            }
+            
+            // Показываем отсортированный список
+            for (size_t i = 0; i < properties.size(); i++) {
+                cout << "ОБЪЕКТ #" << (i + 1) 
+                     << " (дата: " << properties[i].getDate() 
+                     << ", цена: " << properties[i].getPrice() << " руб.): "
+                     << properties[i].getProperty() << endl;
+            }
+            break;
+        }
+        
+        case '3': {
+            // Показываем все объекты (исходный порядок по цене)
+            cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
+            for (size_t i = 0; i < properties.size(); i++) {
+                cout << "ОБЪЕКТ #" << (i + 1) << "\n";
+                properties[i].print();
+            }
+            break;
+        }
+        
+        default: {
+            cout << "Неверный выбор! Показываю все объекты.\n" << endl;
+            for (size_t i = 0; i < properties.size(); i++) {
+                cout << "ОБЪЕКТ #" << (i + 1) << "\n";
+                properties[i].print();
+            }
+            break;
         }
     }
 
