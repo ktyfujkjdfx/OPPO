@@ -81,6 +81,16 @@ void sortByDateDescending(vector<RealEstate>& properties) {
         });
 }
 
+std::string extractDataaFromStr(const std::string& str, const std::regex reg) {
+    std::smatch matches;
+    if (!td::regex_search(str, matches, reg)) {
+        //current.setOwner(matches[1]);
+    }
+
+    return matches[1];
+}
+
+
 int main() {
     std::setlocale(LC_ALL, "ru");
 
