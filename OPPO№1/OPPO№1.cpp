@@ -68,7 +68,7 @@ vector<RealEstate> filterByPriceRange(const vector<RealEstate>& properties, int 
     return filtered;
 }
 
-// Функции сортировки по дате
+
 void sortByDateAscending(vector<RealEstate>& properties) {
     std::sort(properties.begin(), properties.end(),
         [](const RealEstate& a, const RealEstate& b) {
@@ -136,7 +136,7 @@ int main() {
 
     file.close();
 
-    // Сортируем по цене по убыванию (исходная сортировка)
+    // Сортирую по цене по убыванию (исходная сортировка)
     std::sort(properties.begin(), properties.end(), [](const RealEstate& a, const RealEstate& b) {
         return a.getPriceInt() > b.getPriceInt();
         });
@@ -152,11 +152,11 @@ int main() {
     cout << endl;
 
     int min_price, max_price;
-    int menu_choice;
+    int menu_choice;  // ИЗМЕНЕНО: char на int
 
-    // ИЗМЕНЕНО: тексты и форматы вывода в меню
+    // ДОБАВЛЕНО: map-меню вместо switch-case
     std::map<int, MenuItem> menu = {
-        {1, {"Найти по цене", [&]() {
+        {1, {"Фильтр по цене", [&]() {
             cout << "Введите минимальную цену: ";
             cin >> min_price;
             cout << "Введите максимальную цену: ";
@@ -183,65 +183,61 @@ int main() {
             }
         }}},
 
-        {2, {"Сортировать по дате", [&]() {
+        {2, {"Сортировка по дате", [&]() {
             char sort_order;
             cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
             cin >> sort_order;
 
             if (sort_order == '1') {
                 sortByDateAscending(properties);
-                cout << "\nСОРТИРОВКА: от старых к новым\n" << endl;
+                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
             }
  else if (sort_order == '2') {
   sortByDateDescending(properties);
-  cout << "\nСОРТИРОВКА: от новых к старым\n" << endl;
+  cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
 }
 else {
- cout << "Неверный выбор!\n" << endl;
- return;
+ cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
 }
 
-            // ИЗМЕНЕНО: изменен порядок полей в выводе
+            // Показываю отсортированный список
+            for (size_t i = 0; i < properties.size(); i++) {
+                cout << "ОБЪЕКТ #" << (i + 1)
+                     << " (дата: " << properties[i].getDate()
+                     << ", цена: " << properties[i].getPrice() << " руб.): "
+                     << properties[i].getProperty() << endl;
+            }
+        }}},
+
+        {3, {"Показать все объекты", [&]() {
+            cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
             for (size_t i = 0; i < properties.size(); i++) {
                 cout << "[" << (i + 1) << "] "
                      << properties[i].getProperty()
                      << " | Дата: " << properties[i].getDate()
                      << " | Цена: " << properties[i].getPrice() << " руб." << endl;
             }
-        }}},
-
-        {3, {"Показать все", [&]() {
-            // ИЗМЕНЕНО: подробный формат вывода
-            cout << "\nПОЛНЫЙ СПИСОК (" << properties.size() << " объектов):\n" << endl;
-            for (size_t i = 0; i < properties.size(); i++) {
-                cout << "Объект #" << (i + 1) << ":\n";
-                cout << "  Тип: " << properties[i].getProperty() << endl;
-                cout << "  Владелец: " << properties[i].getOwner() << endl;
-                cout << "  Дата: " << properties[i].getDate() << endl;
-                cout << "  Цена: " << properties[i].getPrice() << " руб.\n" << endl;
-            }
         }}}
     };
 
-    // ИЗМЕНЕНО: другой формат меню
-    cout << "\n=== МЕНЮ ===" << endl;
+    // ИЗМЕНЕНО: вывод меню через map
+    cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
     for (const auto& item : menu) {
-        cout << " " << item.first << ". " << item.second.description << endl;
+        cout << item.first << " - " << item.second.description << endl;
     }
-    cout << "Введите номер: ";
+    cout << "Выберите действие (1-" << menu.size() << "): ";
     cin >> menu_choice;
 
+    // ИЗМЕНЕНО: обработка выбора через map вместо switch
     auto it = menu.find(menu_choice);
     if (it != menu.end()) {
         it->second.action();
     }
     else {
-        // ИЗМЕНЕНО: другой формат вывода по умолчанию
-        cout << "Ошибка: неверная команда!" << endl;
-        cout << "\nДоступные объекты:\n" << endl;
+        cout << "Неверный выбор! Показываю все объекты.\n" << endl;
         for (size_t i = 0; i < properties.size(); i++) {
-            cout << (i + 1) << ". " << properties[i].getProperty()
-                << " - " << properties[i].getPrice() << " руб." << endl;
+            cout << "ОБЪЕКТ #" << (i + 1) << "\n";
+            properties[i].print();
         }
     }
 
