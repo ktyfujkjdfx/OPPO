@@ -5,7 +5,7 @@
 #include <regex>
 #include <algorithm>
 #include <map>
-#include <functional>  // ДОБАВЛЕНО: для std::function
+#include <functional>
 
 using std::string;
 using std::vector;
@@ -83,7 +83,6 @@ void sortByDateDescending(vector<RealEstate>& properties) {
         });
 }
 
-// ДОБАВЛЕНО: структура для пункта меню
 struct MenuItem {
     string description;
     std::function<void()> action;
@@ -143,10 +142,12 @@ int main() {
         });
 
 
-    cout << "ВСЕ ОБЪЕКТЫ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
+    // ИЗМЕНЕНО: формат вывода объектов
+    cout << "СПИСОК ОБЪЕКТОВ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
     for (size_t i = 0; i < properties.size(); i++) {
-        cout << "ОБЪЕКТ #" << (i + 1) << " (цена: " << properties[i].getPrice() << " руб., дата: " << properties[i].getDate() << "): "
-            << properties[i].getProperty() << endl;
+        cout << "[" << (i + 1) << "] " << properties[i].getProperty()
+            << " | Цена: " << properties[i].getPrice() << " руб."
+            << " | Дата: " << properties[i].getDate() << endl;
     }
     cout << endl;
 
@@ -162,31 +163,29 @@ int main() {
             cin >> max_price;
 
             if (min_price > max_price) {
-                cout << "Ошибка: минимальная цена не может быть больше максимальной!" << endl;
-                cout << "Меняю местами..." << endl;
+                cout << "Корректирую значения..." << endl;
                 std::swap(min_price, max_price);
             }
 
             vector<RealEstate> filtered_properties = filterByPriceRange(properties, min_price, max_price);
 
             if (filtered_properties.empty()) {
-                cout << "\nОбъектов в диапазоне от " << min_price << " до " << max_price << " руб. не найдено." << endl;
+                cout << "\nВ указанном диапазоне объектов не найдено." << endl;
             }
             else {
-                cout << "\nОБЪЕКТЫ В ДИАПАЗОНЕ ОТ " << min_price << " ДО " << max_price << " РУБ: \n" << endl;
+                // ИЗМЕНЕНО: компактный формат вывода
+                cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
                 for (size_t i = 0; i < filtered_properties.size(); i++) {
-                    cout << "Объект #" << (i + 1) << ":\n";
-                    filtered_properties[i].print();
+                    cout << "● " << filtered_properties[i].getProperty()
+                         << " | " << filtered_properties[i].getPrice() << " руб."
+                         << " | " << filtered_properties[i].getDate() << endl;
                 }
             }
         }}},
 
         {2, {"Сортировка по дате", [&]() {
             char sort_order;
-            cout << "\n=== СОРТИРОВКА ПО ДАТЕ ===" << endl;
-            cout << "1 - По возрастанию (от старых к новым)" << endl;
-            cout << "2 - По убыванию (от новых к старым)" << endl;
-            cout << "Выберите порядок сортировки (1-2): ";
+            cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
             cin >> sort_order;
 
             if (sort_order == '1') {
@@ -213,8 +212,10 @@ else {
         {3, {"Показать все объекты", [&]() {
             cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
             for (size_t i = 0; i < properties.size(); i++) {
-                cout << "ОБЪЕКТ #" << (i + 1) << "\n";
-                properties[i].print();
+                cout << "[" << (i + 1) << "] "
+                     << properties[i].getProperty()
+                     << " | Дата: " << properties[i].getDate()
+                     << " | Цена: " << properties[i].getPrice() << " руб." << endl;
             }
         }}}
     };
