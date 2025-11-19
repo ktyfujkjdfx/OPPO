@@ -1,9 +1,11 @@
-﻿ #include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <regex>
 #include <algorithm>
+#include <map>
+#include <functional>
 
 using std::string;
 using std::vector;
@@ -66,9 +68,9 @@ vector<RealEstate> filterByPriceRange(const vector<RealEstate>& properties, int 
     return filtered;
 }
 
-// Функции сортировки по дате
+
 void sortByDateAscending(vector<RealEstate>& properties) {
-    std::sort(properties.begin(), properties.end(), 
+    std::sort(properties.begin(), properties.end(),
         [](const RealEstate& a, const RealEstate& b) {
             return a.getDate() < b.getDate();
         });
@@ -80,6 +82,11 @@ void sortByDateDescending(vector<RealEstate>& properties) {
             return a.getDate() > b.getDate();
         });
 }
+
+struct MenuItem {
+    string description;
+    std::function<void()> action;
+};
 
 int main() {
     std::setlocale(LC_ALL, "ru");
@@ -129,104 +136,108 @@ int main() {
 
     file.close();
 
-    // Сортируем по цене по убыванию (исходная сортировка)
+    // Сортирую по цене по убыванию (исходная сортировка)
     std::sort(properties.begin(), properties.end(), [](const RealEstate& a, const RealEstate& b) {
         return a.getPriceInt() > b.getPriceInt();
         });
 
 
-    cout << "ВСЕ ОБЪЕКТЫ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
+    // ИЗМЕНЕНО: формат вывода объектов
+    cout << "СПИСОК ОБЪЕКТОВ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
     for (size_t i = 0; i < properties.size(); i++) {
-        cout << "ОБЪЕКТ #" << (i + 1) << " (цена: " << properties[i].getPrice() << " руб., дата: " << properties[i].getDate() << "): "
-            << properties[i].getProperty() << endl;
+        cout << "[" << (i + 1) << "] " << properties[i].getProperty()
+            << " | Цена: " << properties[i].getPrice() << " руб."
+            << " | Дата: " << properties[i].getDate() << endl;
     }
     cout << endl;
 
     int min_price, max_price;
-    char menu_choice;
+    int menu_choice;  // ИЗМЕНЕНО: char на int
 
-    cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
-    cout << "1 - Фильтр по цене" << endl;
-    cout << "2 - Сортировка по дате" << endl;
-    cout << "3 - Показать все объекты" << endl;
-    cout << "Выберите действие (1-3): ";
-    cin >> menu_choice;
-
-    switch (menu_choice) {
-        case '1': {
-            // Фильтр по цене
+    // ДОБАВЛЕНО: map-меню вместо switch-case
+    std::map<int, MenuItem> menu = {
+        {1, {"Фильтр по цене", [&]() {
             cout << "Введите минимальную цену: ";
             cin >> min_price;
             cout << "Введите максимальную цену: ";
             cin >> max_price;
 
             if (min_price > max_price) {
-                cout << "Ошибка: минимальная цена не может быть больше максимальной!" << endl;
-                cout << "Меняю местами..." << endl;
+                cout << "Корректирую значения..." << endl;
                 std::swap(min_price, max_price);
             }
 
             vector<RealEstate> filtered_properties = filterByPriceRange(properties, min_price, max_price);
 
             if (filtered_properties.empty()) {
-                cout << "\nОбъектов в диапазоне от " << min_price << " до " << max_price << " руб. не найдено." << endl;
+                cout << "\nВ указанном диапазоне объектов не найдено." << endl;
             }
             else {
-                cout << "\nОБЪЕКТЫ В ДИАПАЗОНЕ ОТ " << min_price << " ДО " << max_price << " РУБ: \n" << endl;
+                // ИЗМЕНЕНО: компактный формат вывода
+                cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
                 for (size_t i = 0; i < filtered_properties.size(); i++) {
-                    cout << "Объект #" << (i + 1) << ":\n";
-                    filtered_properties[i].print();
+                    cout << "● " << filtered_properties[i].getProperty()
+                         << " | " << filtered_properties[i].getPrice() << " руб."
+                         << " | " << filtered_properties[i].getDate() << endl;
                 }
             }
-            break;
-        }
-        
-        case '2': {
-            // Сортировка по дате
+        }}},
+
+        {2, {"Сортировка по дате", [&]() {
             char sort_order;
-            cout << "\n=== СОРТИРОВКА ПО ДАТЕ ===" << endl;
-            cout << "1 - По возрастанию (от старых к новым)" << endl;
-            cout << "2 - По убыванию (от новых к старым)" << endl;
-            cout << "Выберите порядок сортировки (1-2): ";
+            cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
             cin >> sort_order;
-            
+
             if (sort_order == '1') {
                 sortByDateAscending(properties);
                 cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
-            } else if (sort_order == '2') {
-                sortByDateDescending(properties);
-                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
-            } else {
-                cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
             }
-            
-            // Показываем отсортированный список
+ else if (sort_order == '2') {
+  sortByDateDescending(properties);
+  cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
+}
+else {
+ cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
+}
+
+            // Показываю отсортированный список
             for (size_t i = 0; i < properties.size(); i++) {
-                cout << "ОБЪЕКТ #" << (i + 1) 
-                     << " (дата: " << properties[i].getDate() 
+                cout << "ОБЪЕКТ #" << (i + 1)
+                     << " (дата: " << properties[i].getDate()
                      << ", цена: " << properties[i].getPrice() << " руб.): "
                      << properties[i].getProperty() << endl;
             }
-            break;
-        }
-        
-        case '3': {
-            // Показываем все объекты (исходный порядок по цене)
+        }}},
+
+        {3, {"Показать все объекты", [&]() {
             cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
             for (size_t i = 0; i < properties.size(); i++) {
-                cout << "ОБЪЕКТ #" << (i + 1) << "\n";
-                properties[i].print();
+                cout << "[" << (i + 1) << "] "
+                     << properties[i].getProperty()
+                     << " | Дата: " << properties[i].getDate()
+                     << " | Цена: " << properties[i].getPrice() << " руб." << endl;
             }
-            break;
-        }
-        
-        default: {
-            cout << "Неверный выбор! Показываю все объекты.\n" << endl;
-            for (size_t i = 0; i < properties.size(); i++) {
-                cout << "ОБЪЕКТ #" << (i + 1) << "\n";
-                properties[i].print();
-            }
-            break;
+        }}}
+    };
+
+    // ИЗМЕНЕНО: вывод меню через map
+    cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
+    for (const auto& item : menu) {
+        cout << item.first << " - " << item.second.description << endl;
+    }
+    cout << "Выберите действие (1-" << menu.size() << "): ";
+    cin >> menu_choice;
+
+    // ИЗМЕНЕНО: обработка выбора через map вместо switch
+    auto it = menu.find(menu_choice);
+    if (it != menu.end()) {
+        it->second.action();
+    }
+    else {
+        cout << "Неверный выбор! Показываю все объекты.\n" << endl;
+        for (size_t i = 0; i < properties.size(); i++) {
+            cout << "ОБЪЕКТ #" << (i + 1) << "\n";
+            properties[i].print();
         }
     }
 
