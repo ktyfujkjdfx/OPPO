@@ -13,6 +13,12 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+// ВЫНЕСЕНО: глобальные константы регулярных выражений
+const std::regex OBJECT_PATTERN(R"((Object|OBJECT)\s*#?\s*\d+:\s*([^\.\n]+))", std::regex_constants::icase);
+const std::regex OWNER_PATTERN(R"(\"([^\"]+)\")");
+const std::regex DATE_PATTERN(R"((\d{4}\.\d{2}\.\d{2}))");
+const std::regex PRICE_PATTERN(R"((?:price|cost)[^\d]*?(\d+))", std::regex_constants::icase);
+
 class RealEstate {
 private:
     string property;
@@ -68,7 +74,6 @@ vector<RealEstate> filterByPriceRange(const vector<RealEstate>& properties, int 
     return filtered;
 }
 
-
 void sortByDateAscending(vector<RealEstate>& properties) {
     std::sort(properties.begin(), properties.end(),
         [](const RealEstate& a, const RealEstate& b) {
@@ -101,15 +106,13 @@ int main() {
     RealEstate current;
     string line;
 
-    std::regex object_pattern(R"((Object|OBJECT)\s*#?\s*\d+:\s*([^\.\n]+))", std::regex_constants::icase);
-    std::regex owner_pattern(R"(\"([^\"]+)\")");
-    std::regex date_pattern(R"((\d{4}\.\d{2}\.\d{2}))");
-    std::regex price_pattern(R"((?:price|cost)[^\d]*?(\d+))", std::regex_constants::icase);
+    // УДАЛЕНО: объявление regex внутри main()
+    // ИСПОЛЬЗУЕМ глобальные константы
 
     while (std::getline(file, line)) {
         std::smatch matches;
 
-        if (std::regex_search(line, matches, object_pattern)) {
+        if (std::regex_search(line, matches, OBJECT_PATTERN)) {
             if (current.isComplete()) {
                 properties.push_back(current);
                 current.clear();
@@ -117,15 +120,15 @@ int main() {
             current.setProperty(matches[2]);
         }
 
-        if (std::regex_search(line, matches, owner_pattern) && current.getOwner().empty()) {
+        if (std::regex_search(line, matches, OWNER_PATTERN) && current.getOwner().empty()) {
             current.setOwner(matches[1]);
         }
 
-        if (std::regex_search(line, matches, date_pattern) && current.getDate().empty()) {
+        if (std::regex_search(line, matches, DATE_PATTERN) && current.getDate().empty()) {
             current.setDate(matches[1]);
         }
 
-        if (std::regex_search(line, matches, price_pattern) && current.getPrice().empty()) {
+        if (std::regex_search(line, matches, PRICE_PATTERN) && current.getPrice().empty()) {
             current.setPrice(matches[1]);
         }
     }
@@ -152,7 +155,7 @@ int main() {
     cout << endl;
 
     int min_price, max_price;
-    int menu_choice;  // ИЗМЕНЕНО: char на int
+    int menu_choice;
 
     // ДОБАВЛЕНО: map-меню вместо switch-case
     std::map<int, MenuItem> menu = {
@@ -176,9 +179,9 @@ int main() {
                 // ИЗМЕНЕНО: компактный формат вывода
                 cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
                 for (size_t i = 0; i < filtered_properties.size(); i++) {
-                    cout << "● " << filtered_properties[i].getProperty()
-                         << " | " << filtered_properties[i].getPrice() << " руб."
-                         << " | " << filtered_properties[i].getDate() << endl;
+                    cout << i + 1 << " " << filtered_properties[i].getProperty()
+                        << " | " << filtered_properties[i].getPrice() << " руб."
+                        << " | " << filtered_properties[i].getDate() << endl;
                 }
             }
         }}},
@@ -192,13 +195,13 @@ int main() {
                 sortByDateAscending(properties);
                 cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
             }
- else if (sort_order == '2') {
-  sortByDateDescending(properties);
-  cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
-}
-else {
- cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
-}
+            else if (sort_order == '2') {
+                sortByDateDescending(properties);
+                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
+            }
+            else {
+                cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
+            }
 
             // Показываю отсортированный список
             for (size_t i = 0; i < properties.size(); i++) {
