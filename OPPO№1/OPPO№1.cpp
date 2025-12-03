@@ -20,6 +20,11 @@ struct MenuItem {
     std::function<void()> action;
 };
 
+// объявление функций
+void filterByPriceMenu(vector<RealEstate>& properties);
+void sortByDateMenu(vector<RealEstate>& properties);
+void showAllProperties(vector<RealEstate>& properties);
+
 int main() {
     std::setlocale(LC_ALL, "ru");
 
@@ -44,74 +49,12 @@ int main() {
     }
     cout << endl;
 
-    int min_price, max_price;
     int menu_choice;
 
     std::map<int, MenuItem> menu = {
-        {1, {"Фильтр по цене", [&]() {
-            cout << "Введите минимальную цену: ";
-            cin >> min_price;
-            cout << "Введите максимальную цену: ";
-            cin >> max_price;
-
-            if (min_price > max_price) {
-                cout << "Корректирую значения..." << endl;
-                std::swap(min_price, max_price);
-            }
-
-            vector<RealEstate> filtered_properties =
-                RealEstateFilter::filterByPriceRange(properties, min_price, max_price);
-
-            if (filtered_properties.empty()) {
-                cout << "\nВ указанном диапазоне объектов не найдено." << endl;
-            }
-            else {
-                cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
-                for (size_t i = 0; i < filtered_properties.size(); i++) {
-                    cout << i + 1 << " " << filtered_properties[i].getProperty()
-                        << " | " << filtered_properties[i].getPrice() << " руб."
-                        << " | " << filtered_properties[i].getDate() << endl;
-                }
-            }
-        }}},
-
-        {2, {"Сортировка по дате", [&]() {
-            char sort_order;
-            cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
-            cin >> sort_order;
-
-            vector<RealEstate> sorted_properties = properties;
-
-            if (sort_order == '1') {
-                RealEstateSorter::sortByDateAscending(sorted_properties);
-                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
-            }
-            else if (sort_order == '2') {
-                RealEstateSorter::sortByDateDescending(sorted_properties);
-                cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
-            }
-            else {
-                cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
-                sorted_properties = properties;
-            }
-
-            for (size_t i = 0; i < sorted_properties.size(); i++) {
-                cout << "ОБЪЕКТ #" << (i + 1)
-                     << " (дата: " << sorted_properties[i].getDate()
-                     << ", цена: " << sorted_properties[i].getPrice() << " руб.): "
-                     << sorted_properties[i].getProperty() << endl;
-            }
-        }}},
-
-        {3, {"Показать все объекты", [&]() {
-            cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
-            for (size_t i = 0; i < properties.size(); i++) {
-                cout << "[" << (i + 1) << "] "
-                     << properties[i].getProperty()
-                     << " | Дата: " << properties[i].getDate()
-                     << " | Цена: " << properties[i].getPrice() << " руб." << endl;
-            }
-        }}}
+        {1, {"Фильтр по цене", [&]() { filterByPriceMenu(properties); }}},
+        {2, {"Сортировка по дате", [&]() { sortByDateMenu(properties); }}},
+        {3, {"Показать все объекты", [&]() { showAllProperties(properties); }}}
     };
 
     cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
@@ -134,4 +77,72 @@ int main() {
     }
 
     return 0;
+}
+
+// Реализации функций
+
+void filterByPriceMenu(vector<RealEstate>& properties) {
+    int min_price, max_price;
+
+    cout << "Введите минимальную цену: ";
+    cin >> min_price;
+    cout << "Введите максимальную цену: ";
+    cin >> max_price;
+
+    if (min_price > max_price) {
+        cout << "Корректирую значения..." << endl;
+        std::swap(min_price, max_price);
+    }
+
+    vector<RealEstate> filtered_properties =
+        RealEstateFilter::filterByPriceRange(properties, min_price, max_price);
+
+    if (filtered_properties.empty()) {
+        cout << "\nВ указанном диапазоне объектов не найдено." << endl;
+    }
+    else {
+        cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
+        for (size_t i = 0; i < filtered_properties.size(); i++) {
+            cout << i + 1 << " " << filtered_properties[i].getProperty()
+                << " | " << filtered_properties[i].getPrice() << " руб."
+                << " | " << filtered_properties[i].getDate() << endl;
+        }
+    }
+}
+
+void sortByDateMenu(vector<RealEstate>& properties) {
+    char sort_order;
+    cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
+    cin >> sort_order;
+
+    vector<RealEstate> sorted_properties = properties;
+
+    if (sort_order == '1') {
+        RealEstateSorter::sortByDateAscending(sorted_properties);
+        cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
+    }
+    else if (sort_order == '2') {
+        RealEstateSorter::sortByDateDescending(sorted_properties);
+        cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
+    }
+    else {
+        cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
+        sorted_properties = properties;
+    }
+    for (size_t i = 0; i < sorted_properties.size(); i++) {
+        cout << "ОБЪЕКТ #" << (i + 1)
+            << " (дата: " << sorted_properties[i].getDate()
+            << ", цена: " << sorted_properties[i].getPrice() << " руб.): "
+            << sorted_properties[i].getProperty() << endl;
+    }
+}
+
+void showAllProperties(vector<RealEstate>& properties) {
+    cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
+    for (size_t i = 0; i < properties.size(); i++) {
+        cout << "[" << (i + 1) << "] "
+            << properties[i].getProperty()
+            << " | Дата: " << properties[i].getDate()
+            << " | Цена: " << properties[i].getPrice() << " руб." << endl;
+    }
 }
