@@ -10,4 +10,4 @@ public:
     static void sortByDateDescending(std::vector<RealEstate>& properties);
 };
 
-#endif 
+#endif

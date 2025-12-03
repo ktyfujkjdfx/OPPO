@@ -8,8 +8,8 @@ private:
     std::string property;
     std::string owner;
     std::string date;
-    std::string price;
     int price_int = 0;
+    bool price_set = false;
 
 public:
     void setProperty(const std::string& prop);
@@ -20,12 +20,11 @@ public:
     const std::string& getProperty() const;
     const std::string& getOwner() const;
     const std::string& getDate() const;
-    const std::string& getPrice() const;
-    int getPriceInt() const;
+    int getPrice() const;
 
     void print() const;
     bool isComplete() const;
     void clear();
 };
 
-#endif 
+#endif

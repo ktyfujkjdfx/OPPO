@@ -16,9 +16,7 @@ private:
 public:
     RealEstateParser();
     std::vector<RealEstate> parseFile(const std::string& filename);
-
-    // Метод для тестов - парсит из строки
     std::vector<RealEstate> parseFromString(const std::string& data);
 };
 
-#endif 
+#endif

@@ -41,7 +41,6 @@ std::vector<RealEstate> RealEstateParser::parseFromString(const std::string& dat
     while (std::getline(stream, line)) {
         std::smatch matches;
 
-        // Начало нового объекта
         if (std::regex_search(line, matches, OBJECT_PATTERN) && matches.size() > 2) {
             if (current.isComplete()) {
                 properties.push_back(current);
@@ -53,43 +52,35 @@ std::vector<RealEstate> RealEstateParser::parseFromString(const std::string& dat
 
         if (!inObject) continue;
 
-        // Владелец
         if (current.getOwner().empty() && std::regex_search(line, matches, OWNER_PATTERN) && matches.size() > 1) {
             current.setOwner(trim(matches[1].str()));
         }
 
-        // Дата
         if (current.getDate().empty() && std::regex_search(line, matches, DATE_PATTERN) && matches.size() > 1) {
             current.setDate(trim(matches[1].str()));
         }
 
-        // Цена - ищем разными способами
-        if (current.getPrice().empty()) {
-            // Способ 1: Ключевые слова price/cost (приоритет)
+        if (current.getPrice() == 0) {
             if (std::regex_search(line, matches, PRICE_PATTERN) && matches.size() > 1) {
                 current.setPrice(trim(matches[1].str()));
             }
-            // Способ 2: Просто ищем большие числа (только если УЖЕ есть владелец и дата)
             else if (!current.getOwner().empty() && !current.getDate().empty()) {
-                std::regex number_pattern(R"(\b(\d{5,})\b)"); // числа от 10000 и больше (исключаем годы)
+                std::regex number_pattern(R"(\b(\d{5,})\b)");
                 std::sregex_iterator it(line.begin(), line.end(), number_pattern);
                 std::sregex_iterator end;
 
                 for (; it != end; ++it) {
                     std::string price_str = (*it)[1].str();
 
-                    // Проверяем что это не часть даты
                     if (line.find(price_str) != std::string::npos) {
                         size_t pos = line.find(price_str);
-                        // Если перед числом есть точка или после числа есть точка - скорее всего это дата
                         if ((pos > 0 && line[pos - 1] == '.') ||
                             (pos + price_str.length() < line.length() && line[pos + price_str.length()] == '.')) {
-                            continue; // Пропускаем - это дата
+                            continue;
                         }
                     }
 
                     int price_val = std::stoi(price_str);
-                    // Проверяем что это реальная цена (не номер объекта, не год)
                     if (price_val >= 10000 && price_val <= 100000000) {
                         current.setPrice(price_str);
                         break;
@@ -98,7 +89,6 @@ std::vector<RealEstate> RealEstateParser::parseFromString(const std::string& dat
             }
         }
 
-        // Если объект полный, добавляем
         if (current.isComplete()) {
             properties.push_back(current);
             current.clear();
