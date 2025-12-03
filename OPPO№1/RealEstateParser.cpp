@@ -1,8 +1,9 @@
-#include "RealEstateParser.h"
+п»ї#include "RealEstateParser.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+#include "date_utils.h"
 
 std::string trim(const std::string& str) {
     size_t start = str.find_first_not_of(" \t\n\r");
@@ -15,14 +16,14 @@ RealEstateParser::RealEstateParser()
     : OBJECT_PATTERN(R"((Object|OBJECT)\s*#?\s*\d+\s*:\s*([^\.\n]+)\.?)", std::regex_constants::icase),
     OWNER_PATTERN(R"(\"([^\"]+)\")"),
     DATE_PATTERN(R"((\d{4}\.\d{2}\.\d{2}))"),
-    PRICE_PATTERN(R"((?:price|cost|Price|Cost|стоимость)\s*:?\s*(\d+))")
+    PRICE_PATTERN(R"((?:price|cost|Price|Cost|СЃС‚РѕРёРјРѕСЃС‚СЊ)\s*:?\s*(\d+))")
 {
 }
 
 std::vector<RealEstate> RealEstateParser::parseFile(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        throw std::runtime_error("Файл не открылся: " + filename);
+        throw std::runtime_error("Р¤Р°Р№Р» РЅРµ РѕС‚РєСЂС‹Р»СЃСЏ: " + filename);
     }
 
     std::stringstream buffer;
@@ -56,8 +57,12 @@ std::vector<RealEstate> RealEstateParser::parseFromString(const std::string& dat
             current.setOwner(trim(matches[1].str()));
         }
 
+        // РґРѕР±Р°РІРёР» РїСЂРѕРІРµСЂРєСѓ РґР°С‚С‹
         if (current.getDate().empty() && std::regex_search(line, matches, DATE_PATTERN) && matches.size() > 1) {
-            current.setDate(trim(matches[1].str()));
+            std::string foundDate = trim(matches[1].str());
+            if (isValidDate(foundDate)) {  
+                current.setDate(foundDate);
+            }
         }
 
         if (current.getPrice() == 0) {

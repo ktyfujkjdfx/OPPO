@@ -1,4 +1,5 @@
-#include "RealEstate.h"
+п»ї#include "RealEstate.h"
+#include "date_utils.h"  
 #include <iostream>
 
 using std::string;
@@ -7,16 +8,25 @@ using std::endl;
 
 void RealEstate::setProperty(const string& prop) { property = prop; }
 void RealEstate::setOwner(const string& own) { owner = own; }
-void RealEstate::setDate(const string& dt) { date = dt; }
+
+// РґРѕР±Р°РІРёР» РїСЂРѕРІРµСЂРєСѓ РґР°С‚С‹
+void RealEstate::setDate(const string& dt) {
+    if (isValidDate(dt)) {
+        date = dt;
+    }
+    else {
+        date.clear();  // Р•СЃР»Рё РґР°С‚Р° РЅРµРєРѕСЂСЂРµРєС‚РЅР°СЏ - РѕС‡РёС‰Р°СЋ
+    }
+}
 
 void RealEstate::setPrice(const string& pr) {
     try {
         price_int = std::stoi(pr);
-        price_set = true;  // цена была установлена (даже если 0)
+        price_set = true;  // С†РµРЅР° Р±С‹Р»Р° СѓСЃС‚Р°РЅРѕРІР»РµРЅР° (РґР°Р¶Рµ РµСЃР»Рё 0)
     }
     catch (const std::exception&) {
         price_int = 0;
-        price_set = true;  //ошибка - это попытка установки
+        price_set = true;  // РѕС€РёР±РєР° - СЌС‚Рѕ РїРѕРїС‹С‚РєР° СѓСЃС‚Р°РЅРѕРІРєРё
     }
 }
 
@@ -29,10 +39,10 @@ int RealEstate::getPrice() const {
 }
 
 void RealEstate::print() const {
-    cout << "Недвижимость: " << property
-        << "\nВладелец: " << owner
-        << "\nДата: " << date
-        << "\nСтоимость: " << price_int << " руб.\n"
+    cout << "РќРµРґРІРёР¶РёРјРѕСЃС‚СЊ: " << property
+        << "\nР’Р»Р°РґРµР»РµС†: " << owner
+        << "\nР”Р°С‚Р°: " << date
+        << "\nРЎС‚РѕРёРјРѕСЃС‚СЊ: " << price_int << " СЂСѓР±.\n"
         << "\n";
 }
 
@@ -45,5 +55,5 @@ void RealEstate::clear() {
     owner.clear();
     date.clear();
     price_int = 0;
-    price_set = false;  // сбрасываем флаг
+    price_set = false;  
 }

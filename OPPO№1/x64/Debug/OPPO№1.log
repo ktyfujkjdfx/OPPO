@@ -1,2 +1,5 @@
 ﻿  OPPO№1.cpp
+  tests.cpp
+  Создание кода...
+LINK : warning LNK4067: неоднозначная точка входа; выбрана "mainCRTStartup"
   OPPO№1.vcxproj -> C:\Users\Asus\source\repos\OPPO№1\x64\Debug\OPPO№1.exe

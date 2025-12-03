@@ -6,6 +6,7 @@
 //#include "RealEstateFilter.h"
 //#include "RealEstateSorter.h"
 //
+//
 //int main() {
 //    setlocale(LC_ALL, "ru");
 //    std::cout << "ЗАПУСК ТЕСТОВ ДЛЯ СИСТЕМЫ НЕДВИЖИМОСТИ" << std::endl;
@@ -96,7 +97,7 @@
 //TEST_CASE("RealEstate - Проверка полноты объекта", "[RealEstate][Completeness]") {
 //    RealEstate estate;
 //
-//    SECTION("Пустой объект - не полный") {
+//    SECTION("Пустой объект") {
 //        REQUIRE_FALSE(estate.isComplete());
 //    }
 //
@@ -106,7 +107,6 @@
 //        REQUIRE_FALSE(estate.isComplete()); // Нет даты и цены не установлена
 //
 //        estate.setDate("2023.01.01");
-//        // Теперь: property, owner, date есть, но price_set = false
 //        REQUIRE_FALSE(estate.isComplete()); // Цена не установлена
 //    }
 //
@@ -172,7 +172,82 @@
 //    REQUIRE(estate.getPrice() == 0);
 //    REQUIRE_FALSE(estate.isComplete()); 
 //}
+//// ========================= DATE =========================
 //
+//TEST_CASE("RealEstate - Валидация даты", "[RealEstate][Date]") {
+//    RealEstate estate;
+//
+//    SECTION("Некорректные даты отклоняются") {
+//        // Неправильные месяцы
+//        estate.setDate("2024.00.01");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.13.01");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.14.01");
+//        REQUIRE(estate.getDate().empty());
+//
+//        // Неправильные дни
+//        estate.setDate("2024.01.32");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.02.30");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.04.31");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.07.89");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.07.97");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.07.984");
+//        REQUIRE(estate.getDate().empty());
+//
+//        // Неправильный формат
+//        estate.setDate("2024-07-20");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("2024.7.20");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("24.07.20");
+//        REQUIRE(estate.getDate().empty());
+//
+//        estate.setDate("");
+//        REQUIRE(estate.getDate().empty());
+//    }
+//
+//    SECTION("Корректные даты принимаются") {
+//        estate.setDate("2024.07.20");
+//        REQUIRE(estate.getDate() == "2024.07.20");
+//
+//        estate.setDate("2024.02.29"); // високосный
+//        REQUIRE(estate.getDate() == "2024.02.29");
+//
+//        estate.setDate("2023.02.28"); // не високосный
+//        REQUIRE(estate.getDate() == "2023.02.28");
+//
+//        estate.setDate("2024.01.31");
+//        REQUIRE(estate.getDate() == "2024.01.31");
+//
+//        estate.setDate("2024.04.30");
+//        REQUIRE(estate.getDate() == "2024.04.30");
+//    }
+//
+//    SECTION("Объект с некорректной датой неполный") {
+//        estate.setProperty("Квартира");
+//        estate.setOwner("Иванов");
+//        estate.setPrice("100000");
+//        estate.setDate("2024.14.01");
+//
+//        REQUIRE_FALSE(estate.isComplete());
+//        REQUIRE(estate.getDate().empty());
+//    }
+//}
 //// ==================== ТЕСТЫ ДЛЯ REALESTATEPARSER ====================
 //
 //TEST_CASE("RealEstateParser - Парсинг различных случаев", "[Parser][Parsing]") {
