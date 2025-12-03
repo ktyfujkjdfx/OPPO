@@ -21,12 +21,23 @@ void RealEstate::setDate(const string& dt) {
 
 void RealEstate::setPrice(const string& pr) {
     try {
-        price_int = std::stoi(pr);
-        price_set = true;  // цена была установлена (даже если 0)
+        long long price_val = std::stoll(pr);  // Используем long long
+        if (price_val < 0) {
+            price_int = 0;
+            price_set = false;
+        }
+        else if (price_val > 1000000000) {  // Лимит 1 млрд
+            price_int = 1000000000;
+            price_set = true;
+        }
+        else {
+            price_int = static_cast<int>(price_val);
+            price_set = true;
+        }
     }
     catch (const std::exception&) {
         price_int = 0;
-        price_set = true;  // ошибка - это попытка установки
+        price_set = false;
     }
 }
 

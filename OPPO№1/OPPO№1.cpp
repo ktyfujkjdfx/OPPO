@@ -25,7 +25,7 @@ void filterByPriceMenu(vector<RealEstate>& properties);
 void sortByDateMenu(vector<RealEstate>& properties);
 void showAllProperties(vector<RealEstate>& properties);
 
-int main() {
+int main_pr() {
     std::setlocale(LC_ALL, "ru");
 
     vector<RealEstate> properties;
