@@ -1,7 +1,7 @@
 ﻿#include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 #include <functional>
 
 #include "RealEstate.h"
@@ -9,70 +9,65 @@
 #include "RealEstateFilter.h"
 #include "RealEstateSorter.h"
 
-using std::string;
-using std::vector;
-using std::cout;
-using std::endl;
-using std::cin;
-
 struct MenuItem {
-    string description;
+    std::string description;
     std::function<void()> action;
 };
 
-// объявление функций
-void filterByPriceMenu(vector<RealEstate>& properties);
-void sortByDateMenu(vector<RealEstate>& properties);
-void showAllProperties(vector<RealEstate>& properties);
+// Объявление функций
+void FilterByPriceMenu(std::vector<RealEstate>& properties);
+void SortByDateMenu(std::vector<RealEstate>& properties);
+void ShowAllProperties(std::vector<RealEstate>& properties);
 
-int main_pr() {
+int main() {
     std::setlocale(LC_ALL, "ru");
 
-    vector<RealEstate> properties;
+    std::vector<RealEstate> properties;
 
     try {
         RealEstateParser parser;
-        properties = parser.parseFile("text.txt");
+        properties = parser.ParseFile("text.txt");
     }
     catch (const std::exception& e) {
-        cout << "Ошибка: " << e.what() << endl;
+        std::cout << "Ошибка: " << e.what() << std::endl;
         return 1;
     }
 
-    RealEstateSorter::sortByDateDescending(properties);
+    RealEstateSorter::SortByDateDescending(properties);
 
-    cout << "СПИСОК ОБЪЕКТОВ НЕДВИЖИМОСТИ (" << properties.size() << " шт.)" << endl;
-    for (size_t i = 0; i < properties.size(); i++) {
-        cout << "[" << (i + 1) << "] " << properties[i].getProperty()
-            << " | Цена: " << properties[i].getPrice() << " руб."
-            << " | Дата: " << properties[i].getDate() << endl;
+    std::cout << "СПИСОК ОБЪЕКТОВ НЕДВИЖИМОСТИ(" << properties.size() << " шт)"
+        << std::endl;
+    for (size_t i = 0; i < properties.size(); ++i) {
+        std::cout << "[" << (i + 1) << "] " << properties[i].GetProperty()
+            << " | Цена: " << properties[i].GetPrice() << " руб."
+            << " | Дата: " << properties[i].GetDate() << std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
 
     int menu_choice;
 
     std::map<int, MenuItem> menu = {
-        {1, {"Фильтр по цене", [&]() { filterByPriceMenu(properties); }}},
-        {2, {"Сортировка по дате", [&]() { sortByDateMenu(properties); }}},
-        {3, {"Показать все объекты", [&]() { showAllProperties(properties); }}}
-    };
+        {1, {"Фильтр по цене", [&]() { FilterByPriceMenu(properties); }}},
+        {2, {"Сортировка по дате", [&]() { SortByDateMenu(properties); }}},
+        {3, {"Показать все объекты",
+             [&]() { ShowAllProperties(properties); }}} };
 
-    cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << endl;
+    std::cout << "\n=== ВЫБЕРИТЕ ДЕЙСТВИЕ ===" << std::endl;
     for (const auto& item : menu) {
-        cout << item.first << " - " << item.second.description << endl;
+        std::cout << item.first << "-" << item.second.description << std::endl;
     }
-    cout << "Выберите действие (1-" << menu.size() << "): ";
-    cin >> menu_choice;
+    std::cout << "Выберите действие (1-" << menu.size() << "): ";
+    std::cin >> menu_choice;
 
     auto it = menu.find(menu_choice);
     if (it != menu.end()) {
         it->second.action();
     }
     else {
-        cout << "Неверный выбор! Показываю все объекты.\n" << endl;
-        for (size_t i = 0; i < properties.size(); i++) {
-            cout << "ОБЪЕКТ #" << (i + 1) << "\n";
-            properties[i].print();
+        std::cout << "Неверный выбор! Показываю все объекты.\n" << std::endl;
+        for (size_t i = 0; i < properties.size(); ++i) {
+            std::cout << "ОБЪЕКТ #" << (i + 1) << "\n";
+            properties[i].Print();
         }
     }
 
@@ -81,68 +76,73 @@ int main_pr() {
 
 // Реализации функций
 
-void filterByPriceMenu(vector<RealEstate>& properties) {
-    int min_price, max_price;
+void FilterByPriceMenu(std::vector<RealEstate>& properties) {
+    int min_price;
+    int max_price;
 
-    cout << "Введите минимальную цену: ";
-    cin >> min_price;
-    cout << "Введите максимальную цену: ";
-    cin >> max_price;
+    std::cout << "Введите минимальную цену: ";
+    std::cin >> min_price;
+    std::cout << "Введите максимальную цену: ";
+    std::cin >> max_price;
 
     if (min_price > max_price) {
-        cout << "Корректирую значения..." << endl;
+        std::cout << "Корректирую значения..." << std::endl;
         std::swap(min_price, max_price);
     }
 
-    vector<RealEstate> filtered_properties =
-        RealEstateFilter::filterByPriceRange(properties, min_price, max_price);
+    std::vector<RealEstate> filtered_properties =
+        RealEstateFilter::FilterByPriceRange(properties, min_price, max_price);
 
     if (filtered_properties.empty()) {
-        cout << "\nВ указанном диапазоне объектов не найдено." << endl;
+        std::cout << "\nВ указаном диапазоне объектов не найдено" << std::endl;
     }
     else {
-        cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size() << endl;
-        for (size_t i = 0; i < filtered_properties.size(); i++) {
-            cout << i + 1 << " " << filtered_properties[i].getProperty()
-                << " | " << filtered_properties[i].getPrice() << " руб."
-                << " | " << filtered_properties[i].getDate() << endl;
+        std::cout << "\nНАЙДЕНО ОБЪЕКТОВ: " << filtered_properties.size()
+            << std::endl;
+        for (size_t i = 0; i < filtered_properties.size(); ++i) {
+            std::cout << i + 1 << " " << filtered_properties[i].GetProperty()
+                << " | " << filtered_properties[i].GetPrice() << " руб."
+                << " | " << filtered_properties[i].GetDate() << std::endl;
         }
     }
 }
 
-void sortByDateMenu(vector<RealEstate>& properties) {
+void SortByDateMenu(std::vector<RealEstate>& properties) {
     char sort_order;
-    cout << "\nПорядок сортировки:\n1 - От старых к новым\n2 - От новых к старым\nВыберите: ";
-    cin >> sort_order;
+    std::cout << "\nПорядок сортировки:\n1 - От старых к новым\n"
+        << "2 - От новых к старым\nВыберите: ";
+    std::cin >> sort_order;
 
-    vector<RealEstate> sorted_properties = properties;
+    std::vector<RealEstate> sorted_properties = properties;
 
     if (sort_order == '1') {
-        RealEstateSorter::sortByDateAscending(sorted_properties);
-        cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n" << endl;
+        RealEstateSorter::SortByDateAscending(sorted_properties);
+        std::cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО ВОЗРАСТАНИЮ ДАТЫ:\n"
+            << std::endl;
     }
     else if (sort_order == '2') {
-        RealEstateSorter::sortByDateDescending(sorted_properties);
-        cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n" << endl;
+        RealEstateSorter::SortByDateDescending(sorted_properties);
+        std::cout << "\nОБЪЕКТЫ ОТСОРТИРОВАНЫ ПО УБЫВАНИЮ ДАТЫ:\n"
+            << std::endl;
     }
     else {
-        cout << "Неверный выбор! Показываю без сортировки.\n" << endl;
+        std::cout << "Неверный выбор! Показываю без сортировки\n" << std::endl;
         sorted_properties = properties;
     }
-    for (size_t i = 0; i < sorted_properties.size(); i++) {
-        cout << "ОБЪЕКТ #" << (i + 1)
-            << " (дата: " << sorted_properties[i].getDate()
-            << ", цена: " << sorted_properties[i].getPrice() << " руб.): "
-            << sorted_properties[i].getProperty() << endl;
+
+    for (size_t i = 0; i < sorted_properties.size(); ++i) {
+        std::cout << "ОБЪЕКТ #" << (i + 1) << " (дата: "
+            << sorted_properties[i].GetDate() << ", цена: "
+            << sorted_properties[i].GetPrice() << " руб.): "
+            << sorted_properties[i].GetProperty() << std::endl;
     }
 }
 
-void showAllProperties(vector<RealEstate>& properties) {
-    cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << endl;
-    for (size_t i = 0; i < properties.size(); i++) {
-        cout << "[" << (i + 1) << "] "
-            << properties[i].getProperty()
-            << " | Дата: " << properties[i].getDate()
-            << " | Цена: " << properties[i].getPrice() << " руб." << endl;
+void ShowAllProperties(std::vector<RealEstate>& properties) {
+    std::cout << "\nВСЕ ОБЪЕКТЫ (отсортированы по цене):\n" << std::endl;
+    for (size_t i = 0; i < properties.size(); ++i) {
+        std::cout << "[" << (i + 1) << "] " << properties[i].GetProperty()
+            << " | Дата: " << properties[i].GetDate() << " | Цена: "
+            << properties[i].GetPrice() << " руб." << std::endl;
     }
 }

@@ -1,8 +1,9 @@
 #include "date_utils.h"
-#include <sstream>
-#include <iomanip>
 
-bool isValidDate(const std::string& date) {
+#include <iomanip>
+#include <sstream>
+
+bool IsValidDate(const std::string& date) {
     // Проверка длины формата ГГГГ.ММ.ДД
     if (date.length() != 10) return false;
 
@@ -21,13 +22,15 @@ bool isValidDate(const std::string& date) {
     if (month < 1 || month > 12) return false;
 
     // Количество дней в месяцах
-    static const int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    static const int days_in_month[] = { 31, 28, 31, 30, 31, 30,
+                                        31, 31, 30, 31, 30, 31 };
 
     // Проверка високосного года
-    bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    int maxDay = daysInMonth[month - 1];
-    if (month == 2 && isLeapYear) maxDay = 29;
+    bool is_leap_year =
+        (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    int max_day = days_in_month[month - 1];
+    if (month == 2 && is_leap_year) max_day = 29;
 
     // Проверка дня
-    return day >= 1 && day <= maxDay;
+    return day >= 1 && day <= max_day;
 }

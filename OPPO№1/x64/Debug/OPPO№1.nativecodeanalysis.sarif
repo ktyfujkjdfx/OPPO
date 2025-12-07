@@ -1,0 +1,67 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.41.34120.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/oppo№1.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "31f5ed009960b7924c7f7342359731ee7f0f1a1faabf2d21ea58537cbaba7211"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestate.h"
+          },
+          "hashes": {
+            "sha-256": "cd6a036135bc6f8f467ef26bc8a510413f450bade31742c7b80de3e74ddbc320"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestateparser.h"
+          },
+          "hashes": {
+            "sha-256": "dfb81278ecb1d3dd266be8ff93ba72c540fea8f9df9c2f42c6388744854d079e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestatefilter.h"
+          },
+          "hashes": {
+            "sha-256": "2e93c9b714e79bf6f04fc64acc56d165ab07fead4dcbeaf5078a036f0b2142f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestatesorter.h"
+          },
+          "hashes": {
+            "sha-256": "94d5918195e9454878818f1b9d4532971ab6f550c6bde8026d2d9801f8d6f499"
+          }
+        }
+      ]
+    }
+  ]
+}

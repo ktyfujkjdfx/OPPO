@@ -1,0 +1,51 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.41.34120.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestatesorter.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "de5404f215caf6135aa545a2b3ef29566194abe1773408b2324b2e0f0303872d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestatesorter.h"
+          },
+          "hashes": {
+            "sha-256": "94d5918195e9454878818f1b9d4532971ab6f550c6bde8026d2d9801f8d6f499"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/asus/source/repos/oppo№1/oppo№1/realestate.h"
+          },
+          "hashes": {
+            "sha-256": "cd6a036135bc6f8f467ef26bc8a510413f450bade31742c7b80de3e74ddbc320"
+          }
+        }
+      ]
+    }
+  ]
+}

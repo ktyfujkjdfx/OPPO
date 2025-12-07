@@ -1,13 +1,14 @@
 #ifndef REALESTATESORTER_H
 #define REALESTATESORTER_H
 
-#include "RealEstate.h"
 #include <vector>
+
+#include "RealEstate.h"
 
 class RealEstateSorter {
 public:
-    static void sortByDateAscending(std::vector<RealEstate>& properties);
-    static void sortByDateDescending(std::vector<RealEstate>& properties);
+	static void SortByDateAscending(std::vector<RealEstate>& properties);
+	static void SortByDateDescending(std::vector<RealEstate>& properties);
 };
 
-#endif
+#endif  

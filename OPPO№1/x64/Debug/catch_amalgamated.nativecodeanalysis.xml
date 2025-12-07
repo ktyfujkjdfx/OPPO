@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.cpp</FILENAME>
+      <LINE>1312</LINE>
+      <COLUMN>31</COLUMN>
+    </SFA>
+    <DEFECTCODE>6054</DEFECTCODE>
+    <DESCRIPTION>Возможно, строка "msgBuffer" не завершается нулем.</DESCRIPTION>
+    <FUNCTION>Catch::`anonymous-namespace'::setUpGuardFile</FUNCTION>
+    <DECORATED>?setUpGuardFile@?A0x3a3ff41e@Catch@@YAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z</DECORATED>
+    <FUNCLINE>1303</FUNCLINE>
+    <PROBABILITY>1</PROBABILITY>
+    <RANK>3</RANK>
+    <CATEGORY>
+      <RULECATEGORY>mspft</RULECATEGORY>
+    </CATEGORY>
+    <PATH>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1304</LINE>
+        <COLUMN>17</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1306</LINE>
+        <COLUMN>27</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1307</LINE>
+        <COLUMN>28</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1308</LINE>
+        <COLUMN>25</COLUMN>
+        <KEYEVENT>
+          <ID>1</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>Это выражение может привести к тому, что "msgBuffer" не будет завершаться нулем</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1309</LINE>
+        <COLUMN>31</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1310</LINE>
+        <COLUMN>32</COLUMN>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1311</LINE>
+        <COLUMN>25</COLUMN>
+        <KEYEVENT>
+          <ID>2</ID>
+          <KIND>declaration</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"msgBuffer" является выходными данными из "strerror_s" (объявлено в c:\program files (x86)\windows kits\10\include\10.0.22621.0\ucrt\string.h:182)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1311</LINE>
+        <COLUMN>25</COLUMN>
+        <KEYEVENT>
+          <ID>3</ID>
+          <KIND>branch</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>Войти в эту ветвь (предполагается "!strerror_s(msgBuffer, err)")</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1312</LINE>
+        <COLUMN>31</COLUMN>
+        <KEYEVENT>
+          <ID>4</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Full</IMPORTANCE>
+          <MESSAGE>"msgBuffer" является входными данными для "std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt;::=" (объявлено в c:\program files\microsoft visual studio\2022\community\vc\tools\msvc\14.41.34120\include\xstring:1432)</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+      <SFA>
+        <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+        <FILENAME>catch_amalgamated.cpp</FILENAME>
+        <LINE>1312</LINE>
+        <COLUMN>31</COLUMN>
+        <KEYEVENT>
+          <ID>5</ID>
+          <KIND>usage</KIND>
+          <IMPORTANCE>Essential</IMPORTANCE>
+          <MESSAGE>"msgBuffer" должно завершаться нулем в соответствии с SAL-аннотацией для "="</MESSAGE>
+        </KEYEVENT>
+      </SFA>
+    </PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4403</LINE>
+      <COLUMN>33</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::=</FUNCTION>
+    <DECORATED>??4?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAAAEAV0123@$$QEAV0123@@Z</DECORATED>
+    <FUNCLINE>4403</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4379</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z</DECORATED>
+    <FUNCLINE>4379</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4379</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::&lt;unnamed-tag&gt;::m_value" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z</DECORATED>
+    <FUNCLINE>4379</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;Catch::ReporterSpec&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::ReporterSpec&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@VReporterSpec@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;Catch::ReporterSpec&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;unsigned int&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;unsigned int&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@I@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;unsigned int&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;Catch::`anonymous namespace'::bazelShardingOptions&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::`anonymous namespace'::bazelShardingOptions&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@UbazelShardingOptions@?A0x3a3ff41e@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;Catch::`anonymous namespace'::bazelShardingOptions&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;Catch::BenchmarkStats&lt;std::chrono::duration&lt;double,std::ratio&lt;1,1000000000&gt; &gt; &gt; &gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::BenchmarkStats&lt;std::chrono::duration&lt;double,std::ratio&lt;1,1000000000&gt; &gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@U?$BenchmarkStats@V?$duration@NU?$ratio@$00$0DLJKMKAA@@std@@@chrono@std@@@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;Catch::BenchmarkStats&lt;std::chrono::duration&lt;double,std::ratio&lt;1,1000000000&gt; &gt; &gt; &gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;Catch::AssertionStats&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::AssertionStats&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@UAssertionStats@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;Catch::AssertionStats&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;Catch::AssertionResult&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::AssertionResult&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@VAssertionResult@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;Catch::AssertionResult&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4379</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z</DECORATED>
+    <FUNCLINE>4379</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4379</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z</DECORATED>
+    <FUNCLINE>4379</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3576</LINE>
+      <COLUMN>18</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;enum Catch::ColourMode&gt;::=</FUNCTION>
+    <DECORATED>??4?$Optional@W4ColourMode@Catch@@@Catch@@QEAAAEAV01@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>3576</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3565</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;enum Catch::ColourMode&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@W4ColourMode@Catch@@@Catch@@QEAA@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>3565</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;enum Catch::ColourMode&gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;enum Catch::ColourMode&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@W4ColourMode@Catch@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;enum Catch::ColourMode&gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3565</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Catch@@QEAA@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>3565</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3544</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Optional&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; &gt;::storage" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Catch@@QEAA@XZ</DECORATED>
+    <FUNCLINE>3544</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Optional&lt;std::basic_string&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt; &gt; &gt;::storage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4372</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::&lt;unnamed-tag&gt;::m_value" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@W4ResultType@123@@Z</DECORATED>
+    <FUNCLINE>4372</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Clara::Detail::ResultValueBase&lt;Catch::Clara::Detail::ParseState&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4372</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@W4ResultType@123@@Z</DECORATED>
+    <FUNCLINE>4372</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>4374</LINE>
+      <COLUMN>16</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Переменная "Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value" не инициализирована. Всегда инициализируйте переменную-член (type.6).</DESCRIPTION>
+    <FUNCTION>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@AEBV0123@@Z</DECORATED>
+    <FUNCLINE>4374</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Catch::Clara::Detail::ResultValueBase&lt;enum Catch::Clara::ParseResultType&gt;::&lt;unnamed-tag&gt;::m_value</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3565</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::BenchmarkStats&lt;std::chrono::duration&lt;double,std::ratio&lt;1,1000000000&gt; &gt; &gt; &gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@U?$BenchmarkStats@V?$duration@NU?$ratio@$00$0DLJKMKAA@@std@@@chrono@std@@@Catch@@@Catch@@QEAA@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>3565</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Asus\source\repos\OPPO№1\OPPO№1\</FILEPATH>
+      <FILENAME>catch_amalgamated.hpp</FILENAME>
+      <LINE>3565</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26439</DEFECTCODE>
+    <DESCRIPTION>Эта функция не может выдавать исключения (throw). Объявите ее как "noexcept" (f.6).</DESCRIPTION>
+    <FUNCTION>Catch::Optional&lt;Catch::AssertionStats&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$Optional@UAssertionStats@Catch@@@Catch@@QEAA@$$QEAV01@@Z</DECORATED>
+    <FUNCLINE>3565</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

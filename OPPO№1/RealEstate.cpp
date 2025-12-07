@@ -1,70 +1,68 @@
 ﻿#include "RealEstate.h"
-#include "date_utils.h"  
+
 #include <iostream>
+#include <string>
 
-using std::string;
-using std::cout;
-using std::endl;
+#include "date_utils.h"
 
-void RealEstate::setProperty(const string& prop) { property = prop; }
-void RealEstate::setOwner(const string& own) { owner = own; }
+void RealEstate::SetProperty(const std::string& prop) { property_ = prop; }
 
-// добавил проверку даты
-void RealEstate::setDate(const string& dt) {
-    if (isValidDate(dt)) {
-        date = dt;
+void RealEstate::SetOwner(const std::string& own) { owner_ = own; }
+
+void RealEstate::SetDate(const std::string& dt) {
+    if (IsValidDate(dt)) {
+        date_ = dt;
     }
     else {
-        date.clear();  // Если дата некорректная - очищаю
+        date_.clear();  // Если дата некорректная - очищаю
     }
 }
 
-void RealEstate::setPrice(const string& pr) {
+void RealEstate::SetPrice(const std::string& pr) {
     try {
         long long price_val = std::stoll(pr);  // Используем long long
         if (price_val < 0) {
-            price_int = 0;
-            price_set = false;
+            price_int_ = 0;
+            price_set_ = false;
         }
         else if (price_val > 1000000000) {  // Лимит 1 млрд
-            price_int = 1000000000;
-            price_set = true;
+            price_int_ = 1000000000;
+            price_set_ = true;
         }
         else {
-            price_int = static_cast<int>(price_val);
-            price_set = true;
+            price_int_ = static_cast<int>(price_val);
+            price_set_ = true;
         }
     }
     catch (const std::exception&) {
-        price_int = 0;
-        price_set = false;
+        price_int_ = 0;
+        price_set_ = false;
     }
 }
 
-const string& RealEstate::getProperty() const { return property; }
-const string& RealEstate::getOwner() const { return owner; }
-const string& RealEstate::getDate() const { return date; }
+const std::string& RealEstate::GetProperty() const { return property_; }
 
-int RealEstate::getPrice() const {
-    return price_int;
+const std::string& RealEstate::GetOwner() const { return owner_; }
+
+const std::string& RealEstate::GetDate() const { return date_; }
+
+int RealEstate::GetPrice() const { return price_int_; }
+
+void RealEstate::Print() const {
+    std::cout << "Недвижимость: " << property_ << "\nВладелец: " << owner_
+        << "\nДата: " << date_ << "\nСтоимость: " << price_int_
+        << " руб.\n\n";
 }
 
-void RealEstate::print() const {
-    cout << "Недвижимость: " << property
-        << "\nВладелец: " << owner
-        << "\nДата: " << date
-        << "\nСтоимость: " << price_int << " руб.\n"
-        << "\n";
+bool RealEstate::IsComplete() const {
+    return !property_.empty() && !owner_.empty() && !date_.empty() &&
+        price_set_;
 }
 
-bool RealEstate::isComplete() const {
-    return !property.empty() && !owner.empty() && !date.empty() && price_set;
-}
-
-void RealEstate::clear() {
-    property.clear();
-    owner.clear();
-    date.clear();
-    price_int = 0;
-    price_set = false;  
+void RealEstate::Clear() {
+    property_.clear();
+    owner_.clear();
+    date_.clear();
+    price_int_ = 0;
+    price_set_ = false;
 }

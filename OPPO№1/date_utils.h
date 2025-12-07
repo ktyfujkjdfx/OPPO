@@ -3,6 +3,6 @@
 
 #include <string>
 
-bool isValidDate(const std::string& date);
+bool IsValidDate(const std::string& date);
 
-#endif
+#endif  

@@ -1,0 +1,838 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "Возможно, строка \"msgBuffer\" не завершается нулем."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                },
+                "region": {
+                  "startLine": 1312,
+                  "startColumn": 25,
+                  "endLine": 1312,
+                  "endColumn": 34
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::`anonymous-namespace'::setUpGuardFile",
+                  "decoratedName": "?setUpGuardFile@?A0x3a3ff41e@Catch@@YAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1304,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1306,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1307,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1308,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Это выражение может привести к тому, что \"msgBuffer\" не будет завершаться нулем"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1309,
+                            "startColumn": 32
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1310,
+                            "startColumn": 33
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1311,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "\"msgBuffer\" является выходными данными из \"strerror_s\" (объявлено в c:\\program files (x86)\\windows kits\\10\\include\\10.0.22621.0\\ucrt\\string.h:182)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1311,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Войти в эту ветвь (предполагается \"!strerror_s(msgBuffer, err)\")"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1312,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "\"msgBuffer\" является входными данными для \"std::basic_string<char,std::char_traits<char>,std::allocator<char> >::=\" (объявлено в c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.41.34120\\include\\xstring:1432)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+                          },
+                          "region": {
+                            "startLine": 1312,
+                            "startColumn": 32
+                          }
+                        },
+                        "message": {
+                          "text": "\"msgBuffer\" должно завершаться нулем в соответствии с SAL-аннотацией для \"=\""
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4403,
+                  "startColumn": 34
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::=",
+                  "decoratedName": "??4?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAAAEAV0123@$$QEAV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4379,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::<unnamed-tag>::m_value\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4379,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<Catch::ReporterSpec>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::ReporterSpec>::{ctor}",
+                  "decoratedName": "??0?$Optional@VReporterSpec@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<Catch::ReporterSpec>::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<unsigned int>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<unsigned int>::{ctor}",
+                  "decoratedName": "??0?$Optional@I@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<unsigned int>::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<Catch::`anonymous namespace'::bazelShardingOptions>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::`anonymous namespace'::bazelShardingOptions>::{ctor}",
+                  "decoratedName": "??0?$Optional@UbazelShardingOptions@?A0x3a3ff41e@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<Catch::`anonymous namespace'::bazelShardingOptions>::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<Catch::BenchmarkStats<std::chrono::duration<double,std::ratio<1,1000000000> > > >::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::BenchmarkStats<std::chrono::duration<double,std::ratio<1,1000000000> > > >::{ctor}",
+                  "decoratedName": "??0?$Optional@U?$BenchmarkStats@V?$duration@NU?$ratio@$00$0DLJKMKAA@@std@@@chrono@std@@@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<Catch::BenchmarkStats<std::chrono::duration<double,std::ratio<1,1000000000> > > >::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<Catch::AssertionStats>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::AssertionStats>::{ctor}",
+                  "decoratedName": "??0?$Optional@UAssertionStats@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<Catch::AssertionStats>::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<Catch::AssertionResult>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::AssertionResult>::{ctor}",
+                  "decoratedName": "??0?$Optional@VAssertionResult@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<Catch::AssertionResult>::storage"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4379,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4379,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@$$QEAV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3576,
+                  "startColumn": 19
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<enum Catch::ColourMode>::=",
+                  "decoratedName": "??4?$Optional@W4ColourMode@Catch@@@Catch@@QEAAAEAV01@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3565,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<enum Catch::ColourMode>::{ctor}",
+                  "decoratedName": "??0?$Optional@W4ColourMode@Catch@@@Catch@@QEAA@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<enum Catch::ColourMode>::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<enum Catch::ColourMode>::{ctor}",
+                  "decoratedName": "??0?$Optional@W4ColourMode@Catch@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<enum Catch::ColourMode>::storage"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3565,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::{ctor}",
+                  "decoratedName": "??0?$Optional@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Catch@@QEAA@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Optional<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::storage\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3544,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::{ctor}",
+                  "decoratedName": "??0?$Optional@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Catch@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Optional<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::storage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::<unnamed-tag>::m_value\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4372,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@VParseState@Detail@Clara@Catch@@@Detail@Clara@Catch@@IEAA@W4ResultType@123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Clara::Detail::ResultValueBase<Catch::Clara::Detail::ParseState>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4372,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@W4ResultType@123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 4374,
+                  "startColumn": 17
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::{ctor}",
+                  "decoratedName": "??0?$ResultValueBase@W4ParseResultType@Clara@Catch@@@Detail@Clara@Catch@@IEAA@AEBV0123@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Catch::Clara::Detail::ResultValueBase<enum Catch::Clara::ParseResultType>::<unnamed-tag>::m_value"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3565,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::BenchmarkStats<std::chrono::duration<double,std::ratio<1,1000000000> > > >::{ctor}",
+                  "decoratedName": "??0?$Optional@U?$BenchmarkStats@V?$duration@NU?$ratio@$00$0DLJKMKAA@@std@@@chrono@std@@@Catch@@@Catch@@QEAA@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "Эта функция не может выдавать исключения (throw). Объявите ее как \"noexcept\" (f.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+                },
+                "region": {
+                  "startLine": 3565,
+                  "startColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Catch::Optional<Catch::AssertionStats>::{ctor}",
+                  "decoratedName": "??0?$Optional@UAssertionStats@Catch@@@Catch@@QEAA@$$QEAV01@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.41.34120.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "79b8d94f696929d99aefd567bb51dd3f1ee7221e0891f65276dfd8369fb25be4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/Asus/source/repos/OPPO№1/OPPO№1/catch_amalgamated.hpp"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "0646df67296ad02fa48f06de56b2db05cc02a1f687085dae1d6f7d85676bb53f"
+          }
+        }
+      ]
+    }
+  ]
+}
